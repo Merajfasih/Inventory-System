@@ -1,0 +1,230 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace product
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void productsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.productsBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.dataSet1);
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dataSet1.catageroe' table. You can move, or remove it, as needed.
+            this.catageroeTableAdapter.Fill(this.dataSet1.catageroe);
+            // TODO: This line of code loads data into the 'dataSet1.supplers' table. You can move, or remove it, as needed.
+            this.supplersTableAdapter.Fill(this.dataSet1.supplers);
+            // TODO: This line of code loads data into the 'dataSet1.View_1' table. You can move, or remove it, as needed.
+            this.view_1TableAdapter.Fill(this.dataSet1.View_1);
+            // TODO: This line of code loads data into the 'dataSet1.products' table. You can move, or remove it, as needed.
+            this.productsTableAdapter.Fill(this.dataSet1.products);
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            groupBox2.Visible = true;
+            groupBox1.Visible = false; 
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            groupBox2.Visible = false;
+            groupBox1.Visible = true;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            productsBindingSource.MoveFirst();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            productsBindingSource.MoveNext();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            productsBindingSource.MovePrevious();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            productsBindingSource.MoveLast();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            view_1TableAdapter.FillByPRODUCT(dataSet1.View_1, "%" + textBox1.Text + "%");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult A = MessageBox.Show("Do You Want to Add New Record","Information",MessageBoxButtons.YesNo , MessageBoxIcon.Question);
+            if (A == DialogResult.Yes)
+            {
+                productsBindingSource.AddNew();
+ 
+            }
+            
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DialogResult A = MessageBox.Show("Do You Want to Save this Record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (A == DialogResult.Yes)
+            {
+                productsBindingSource.EndEdit();
+                productsTableAdapter.Update(dataSet1.products);
+                dataSet1.products.AcceptChanges();
+                MessageBox.Show("Record has been saved", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            }
+
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DialogResult A = MessageBox.Show("Do You Want to update this Record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (A == DialogResult.Yes)
+            {
+                productsBindingSource.EndEdit();
+                productsTableAdapter.Update(dataSet1.products);
+                dataSet1.products.AcceptChanges();
+                MessageBox.Show("Record has been update", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            
+            DialogResult A = MessageBox.Show("Do You Want to delete this Record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (A == DialogResult.Yes)
+            {
+                try
+                {
+                    productsBindingSource.RemoveCurrent();
+                    productsBindingSource.EndEdit();
+                    productsTableAdapter.Update(dataSet1.products);
+                    dataSet1.products.AcceptChanges();
+                    MessageBox.Show("Record has been delete", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("you can not delete this record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                }
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            
+            this.Hide();
+            //Form1 f1 = new Form1();
+            Form2 f2 = new Form2();
+            f2.Show();
+
+        }
+
+        private void nEWPRODUCTSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult A = MessageBox.Show("Do You Want to Add New Record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (A == DialogResult.Yes)
+            {
+                productsBindingSource.AddNew();
+
+            }
+        }
+
+        private void aDDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult A = MessageBox.Show("Do You Want to Save this Record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (A == DialogResult.Yes)
+            {
+                productsBindingSource.EndEdit();
+                productsTableAdapter.Update(dataSet1.products);
+                dataSet1.products.AcceptChanges();
+                MessageBox.Show("Record has been saved", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            }
+        }
+
+        private void dELETEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DialogResult A = MessageBox.Show("Do You Want to delete this Record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (A == DialogResult.Yes)
+            {
+                try
+                {
+                    productsBindingSource.RemoveCurrent();
+                    productsBindingSource.EndEdit();
+                    productsTableAdapter.Update(dataSet1.products);
+                    dataSet1.products.AcceptChanges();
+                    MessageBox.Show("Record has been delete", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("you can not delete this record", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                }
+            }
+        }
+
+        private void fIRSTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            productsBindingSource.MoveFirst();
+        
+        }
+
+        private void nEXTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            productsBindingSource.MoveNext();
+        }
+
+        private void pREVIOUSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            productsBindingSource.MovePrevious();
+        }
+
+        private void lASTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            productsBindingSource.MoveLast();
+        }
+
+        private void gOTOINVOICEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            this.Hide();
+            //Form1 f1 = new Form1();
+            Form2 f2 = new Form2();
+            f2.Show();
+
+        }
+    }
+}
