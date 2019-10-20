@@ -1,0 +1,106 @@
+  using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace product
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void orderBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.orderBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.dataSet2);
+
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dataSet2.ORDERDETAIL' table. You can move, or remove it, as needed.
+            this.oRDERDETAILTableAdapter.Fill(this.dataSet2.ORDERDETAIL);
+            // TODO: This line of code loads data into the 'dataSet2.order' table. You can move, or remove it, as needed.
+            this.orderTableAdapter.Fill(this.dataSet2.order);
+//            ClcTotal();
+
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            orderBindingSource.MoveFirst();
+            //ClcTotal();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            orderBindingSource.MoveNext();
+            //ClcTotal();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            orderBindingSource.MovePrevious();
+           // ClcTotal();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            orderBindingSource.MovePrevious();
+           // ClcTotal();
+        }
+
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Form1 F1 = new Form1();
+            F1.Show();
+        }
+
+        //private void ClcTotal()
+        //{
+        //    double Total = 0;
+            
+        //    foreach(DataSet2.ORDERDETAILRow row in dataSet2.ORDERDETAIL.Rows)
+        //    {
+        //        double Q, T, U;
+        //        Q = double.Parse(row.OTY.ToString());
+        //        U = double.Parse(row.UNITPRICE.ToString());
+        //        T = Q * U;
+        //       // row.Total = decimal.Parse(T.ToString());
+
+        //        Total+=T;
+
+                
+        //    }
+        //    label2.Text = Total.ToString();
+             
+        }
+        }
+    
+
